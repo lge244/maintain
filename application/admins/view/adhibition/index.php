@@ -12,7 +12,7 @@
 </head>
 <body style="padding: 10px;">
 <div class="header">
-	<span>管理员列表</span>
+	<span>维修项目列表</span>
 	<button class="layui-btn layui-btn-sm" onclick="add()">添加</button>
 	<div></div>
 </div>
@@ -20,11 +20,8 @@
 	<thead>
 	<tr>
 		<th>ID</th>
-		<th>用户名</th>
-		<th>真实姓名</th>
-		<th>角色</th>
-		<th>状态</th>
-		<th>添加时间</th>
+		<th>维修项目的名称</th>
+		<th>维修项目的价格</th>
 		<th>操作</th>
 	</tr>
 	</thead>
@@ -32,11 +29,8 @@
 	{volist name='$lists' id="vo"}
 	<tr>
 		<td>{$vo.id}</td>
-		<td>{$vo.username}</td>
-		<td>{$vo.truename}</td>
-		<td>{$vo.gid}</td>
-		<td>{$vo.status==0?'正常':'<span style="color: red;">禁用</span>'}</td>
-		<td>{:date('Y-m-d H:i:s',$vo.add_time)}</td>
+		<td>{$vo.maintain_title}</td>
+		<td>{$vo.maintain_price}</td>
 		<td>
 			<button class="layui-btn layui-btn-xs" onclick="add({$vo.id})">编辑</button>
 			<button class="layui-btn layui-btn-danger layui-btn-xs" onclick="del({$vo.id})">删除</button>
@@ -56,10 +50,10 @@
 	function add(id){
 		layer.open({
 			type:2,
-			title:id>0?'编辑管理员':'添加管理员',
+			title:id>0?'编辑维修项目':'添加维修项目',
 			shade:0.3,
 			area:['480px','420px'],
-			content:'/index.php/admins/admin/add?id='+id
+			content:'/index.php/admins/adhibition/add?id='+id
 		});
 	}
 	// 删除
@@ -68,7 +62,7 @@
 			icon:3,
 			btn:['确定','取消']
 		},function(){
-			$.post('/index.php/admins/admin/delete',{'id':id},function(res){
+			$.post('/index.php/admins/adhibition/delete',{'id':id},function(res){
 				if(res.code>0){
 					layer.alert(res.msg,{'icon':2});
 				}else{

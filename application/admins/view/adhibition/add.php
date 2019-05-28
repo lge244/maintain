@@ -9,43 +9,18 @@
 <form class="layui-form">
 	<input type="hidden" name="id" value="{$item.id}">
 	<div class="layui-form-item">
-		<label class="layui-form-label">用户名</label>
+		<label class="layui-form-label">项目名称</label>
 		<div class="layui-input-inline">
-			<input type="text" class="layui-input" name="username" value="{$item.username}" <?=$item['id']>0?'readonly':''?>>
+			<input type="text" class="layui-input" name="maintain_title" value="{$item.maintain_title}">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">项目价格</label>
+		<div class="layui-input-inline">
+			<input type="number" class="layui-input" name="maintain_price" value="{$item.maintain_price}">
 		</div>
 	</div>
 
-	<div class="layui-form-item">
-		<label class="layui-form-label">角色</label>
-		<div class="layui-input-inline">
-			<select name="gid">
-				<option value="1">系统管理员</option>
-				<option value="2">开发人员</option>
-				<option value="3">网站编辑</option>
-			</select>
-		</div>
-	</div>
-
-	<div class="layui-form-item">
-		<label class="layui-form-label">密码</label>
-		<div class="layui-input-inline">
-			<input type="password" class="layui-input" name="password">
-		</div>
-	</div>
-
-	<div class="layui-form-item">
-		<label class="layui-form-label">姓名</label>
-		<div class="layui-input-inline">
-			<input type="text" class="layui-input" name="truename" value="{$item.truename}">
-		</div>
-	</div>
-
-	<div class="layui-form-item">
-		<label class="layui-form-label">状态</label>
-		<div class="layui-input-inline">
-			<input type="checkbox" name="status" lay-skin="primary" title="禁用" value="1" {$item.status?'checked':''}>
-		</div>
-	</div>
 </form>
 <div class="layui-form-item">
 	<div class="layui-input-block">
@@ -62,23 +37,17 @@
 	});
 	function save(){
 		var id = parseInt($('input[name="id"]').val());
-		var username = $.trim($('input[name="username"]').val());
-		var pwd = $.trim($('input[name="password"]').val());
-		var truename = $.trim($('input[name="truename"]').val());
-		var gid = $('select[name="gid"]').val();
-		if(username==''){
-			layer.alert('请输入用户名',{'icon':2});
+		var maintain_price = $.trim($('input[name="maintain_price"]').val());
+        var maintain_title = $.trim($('input[name="maintain_title"]').val());
+		if(maintain_title==''){
+			layer.alert('项目名称不能为空',{'icon':2});
 			return;
 		}
-		if(isNaN(id) && pwd==''){
-			layer.alert('请输入密码',{'icon':2});
+		if(maintain_price==''){
+			layer.alert('项目价格不能为空',{'icon':2});
 			return;
 		}
-		if(truename==''){
-			layer.alert('请输入真实姓名',{'icon':2});
-			return;
-		}
-		$.post('/index.php/admins/admin/save',$('form').serialize(),function(res){
+		$.post('/index.php/admins/abhibition/save',$('form').serialize(),function(res){
 			if(res.code>0){
 				layer.alert(res.msg,{'icon':2});
 			}else{
