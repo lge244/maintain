@@ -57,10 +57,10 @@
     function add(id){
         layer.open({
             type:2,
-            title:id>0?'编辑管理员':'添加管理员',
+            title:id>0?'编辑维修项目':'添加维修项目',
             shade:0.3,
-            area:['480px','420px'],
-            content:'/index.php/admins/admin/add?id='+id
+            area:['580px','520px'],
+            content:'/index.php/admins/adhibition/add?id='+id
         });
     }
 

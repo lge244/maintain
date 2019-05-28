@@ -19,4 +19,9 @@ class Adhibition extends Base
         $this->view->lists = $lists;
         return $this->fetch();
     }
+
+    public function add()
+    {
+        return $this->fetch();
+    }
 }

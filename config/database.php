@@ -15,9 +15,9 @@ return [
     // 服务器地址
     'hostname'        => '211.149.132.233',
     // 数据库名
-    'database'        => 'maintian',
+    'database'        => 'maintain',
     // 用户名
-    'username'        => 'maintian',
+    'username'        => 'maintain',
     // 密码
     'password'        => 'jtcZLLKxPJyfpmE7',
     // 端口
