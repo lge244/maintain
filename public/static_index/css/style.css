@@ -1,0 +1,75 @@
+body{width: 100%;height: 100%;background: #fff;}
+a{color: #fff;}
+/*头部开始*/
+.top{width: 100%;background: #40d1c4;height: 1rem;line-height: 1rem;}
+.top-content{width: 96%;margin: 0 auto;position: relative;text-align: center;color: #fff;font-size: .32rem;font-weight: bold;}
+.back{position: absolute;left: -3%;}
+.back-pic{width: 50%;}
+.cancel{position: absolute;right: 0;top: 0;}
+/*头部结束*/
+/*工资开始*/
+.salary{width: 100%;background: #40d1c4;height: 1rem;line-height: 1rem;}
+.salary-ul{width: 96%;margin: 0 auto;font-size: .3rem;display: flex;}
+.salary-li{flex: 1;}
+/*工资结束*/
+/*订单开始*/
+.dd-wrap{width: 100%;}
+.dd-tab{width: 100%;}
+.dd-tab-hd{width: 100%;height: .8rem;line-height: .8rem;background: #40d1c4;display: flex;}
+.dd-li{flex: 1;text-align: center;font-size: .3rem;color: #fff;cursor: pointer;}
+.dd-tab-hd li.active{background: #009899;}
+.dd-tab-bd{width: 100%;}
+.dd-info{width: 100%;}
+.info-ul{width: 100%;background: #40d1c4;font-size: .3rem;display: flex;margin-top: .4rem;}
+.info-li{margin: 0 2%;flex: 1;height: .8rem;line-height: .8rem;color: #fff;   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.description{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+/*订单结束*/
+
+
+/***********手机页面-订单详情***********/
+/*订单开始*/
+.dingdan{width: 100%;}
+.dingdan-ul{width: 96%;margin: 0 auto;}
+.dingdan-li{display: flex;color: #333;font-size: .32rem;height: .8rem;line-height: .8rem;border-bottom: 1px solid #ccc;}
+.dingdan-left{flex: 1;text-align: right;margin-right: .5rem;}
+.dingdan-right{flex: 3;}
+.choose-ul{width: 96%;margin: .5rem auto;display: flex;}
+.choose-li{flex: 1;text-align: center;}
+.choose-btn{width: 50%;color: #fff;border: none;border-radius: .4rem;font-size: .32rem;}
+.yes{background: #40d1c4;}
+.no{background: #ff3334;}
+/*订单结束*/
+
+/*登录开始*/
+.top-one{margin:.5rem auto;width: 100%;height:.8rem;background:#40d1c4;}
+
+/*登录结束*/
+.two{width: 90%;margin: .2rem auto;height:.6rem;}
+.two .two-p{color: #fff;font-size: .25rem;float: left;line-height:.6rem;}
+.two .two-button{color: #fff;float: right;margin-top: .14rem;border: none;background: transparent;}
+.two-p2{color: #fff;background: #CCCCCC;display: block;border-radius: .1rem;margin: .2rem auto;height: .4rem;text-align: center;line-height: .4rem;width: 50%;}
+.two-ul{display: flex;height: 2rem;width: 90%;margin: .2rem auto;}
+.two-li li{flex: 1;background: #f00;}
+.pic-li{position: relative;flex: 1;margin: 0 2%;}
+.pic-input{width: 100%;height: 100%;position: absolute;top: 0;opacity: 0;}
+
+/*拍照*/
+#ad{width:100%;}
+.request_title{width:100%;height:.6rem;line-height:.6rem;font-size:0.28rem;background: #999;color: #fff;}
+			.request_select2{width:90%;margin: .2rem auto;}
+			#pink {width: 100%;height: 2rem;}
+			.request_select2 #pink .dd{width:2rem;height:2rem;background:#fff;color:#9a9a9a;border:.01rem solid #9a9a9a;float:left;position:relative;}
+			.request_select2 #pink .dd input {position:relative;opacity:0;display:block;height:100%;width:100%;}
+			.request_select2 #pink .dd span{text-align:center;width:1.5rem;height:1.5rem;font-size:1.5rem;margin:auto;position:absolute;top:0;
+left:0;bottom:0;right:0;}
+			.request_select2  .yy{display:inline-table;width:2rem;height:2rem;float:left;}
+			.hidden{display:none;}
+			.show{display:inline-block;}
+			#dd{float:right;height:.6rem;text-align:right;padding-right:.4rem;width: 1rem;}
+			#over{float:right;height:.6rem;background:#ff586e;;color:#fff;text-align:center;width: 1rem;}
+			.cel{display:none;height:2rem;width:2rem;background:rgba(14, 14, 14,0.85);margin:0;padding:0;line-height:4rem;text-align:center;color: #fff;position:relative;top:0;}
+			.cel1{display:block;z-index:988;height:2rem;width:2rem;background: rgba(14, 14, 14, 0.85);margin:0;padding:0;line-height:4rem;text-align:center;color: #fff;position:relative;top:0;}
+			.ch{display:inline-block;transform:rotate(45deg);font-size:1.4rem;margin:auto;position:absolute;top:0;left:0;bottom: 0;right:0;text-align: center;border-radius: 50%;padding-left:-0.5rem;}
+			.ci{margin-right:0.5rem;z-index:888;float:left;}
+
+

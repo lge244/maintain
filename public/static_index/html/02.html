@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" >
+		<link rel="stylesheet" type="text/css" href="../css/border.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css"  />
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/mui.previewimage.js"></script>
+	</head>
+	<body>
+		<!--头部开始-->
+		<div class="top">
+			<div class="top-content">
+				<a href="javascript:;" class="back"><img src="../img/back.png" class="back-pic" /></a>
+				<p class="top-name">订单20190527</p>
+			</div>
+		</div>
+		<div style="background:#999999;width: 100%;">
+			<div class="two">
+				<p class="two-p">已到达地点？</p>
+				<button	class="two-button">确定</button>
+			</div>
+		</div>
+		<p class="two-p2">下午一点20确定达到</p>
+		<div style="background:#999999;width: 100%;">
+			<div class="two">
+				<p class="two-p">请拍下条形码</p>
+				<button	class="two-button">扫描</button>
+			</div>
+		</div>
+		<p class="two-p2">下午一点20已扫描条形码</p>
+		<form action="#" method="post" enctype="multipart/form-data">
+			<div id="ad">
+			    <div class="request_title">
+			    	<span style="float:left;height:.6rem;margin-left: .4rem;">请上传照片以便审核</span>
+			    	<span class="show" id="dd">编辑</span>
+			    	<span id="over" class="hidden">完成</span>
+			    </div>
+			    <div class="request_select2" id="ss">
+			        <div id="pink">
+			            <div class="dd">
+			            	<input type="file" name="file1" id="ad_doc1" accept="image/*" onchange="cnm(this)">
+			            	<span>+</span>
+			            </div> 
+			        </div>
+			    </div>
+			</div>
+		</form>
+		<p class="two-p2">下午一点20已拍照</p>
+		<div style="background:#999999;width: 100%;">
+			<div class="two">
+				<p class="two-p">已到维修？请填写维修信息</p>
+				<a href="#" class="two-button">填写</a>
+				<a href="#" class="two-button" style="margin:.14rem .18rem;">未完成</a>
+			</div>
+		</div>
+		<p class="two-p2">下午一点20已填写维修信息</p>
+		<div style="background:#999999;width: 100%;">
+			<div class="two">
+				<p class="two-p">点击确定完成所有工作将生成维修费用</p>
+				<button	class="two-button">确定</button>
+			</div>
+		</div>
+		<p class="two-p2" style="width: 60%;">本次维修您共获得190元维修费</p>
+		<p class="two-p2" style="width:89%;">如果对费用结算有什么疑问请联系管理员进行核实</p>
+		<script>
+			mui.previewImage();
+document.getElementById("dd").onclick=function(){
+    var tt=document.getElementsByClassName("yy");
+    if(tt.length>0){
+ 
+        var a1=document.getElementById("pink");
+        var a2=a1.getElementsByClassName("yy");
+ 
+        for( var i=0;i<a2.length;i++){
+            a2[i].getElementsByTagName("div")[0].className="cel1";
+ 
+        }
+        document.getElementById("dd").className="hidden";
+        document.getElementById("over").className="show";
+        document.getElementsByClassName("dd")[0].className="dd hidden";
+    };
+ 
+ 
+    document.getElementById("over").onclick=function() {
+ 
+        var a1 = document.getElementById("pink");
+        var a2 = a1.getElementsByClassName("yy");
+ 
+        for (var i = 0; i < a2.length; i++) {
+            a2[i].getElementsByTagName("div")[0].className = "cel";
+ 
+        }
+        document.getElementById("dd").className = "show";
+        document.getElementById("over").className = "hidden";
+ 
+        document.getElementsByClassName("dd")[0].className = "dd";
+    }
+ 
+ 
+};
+ 
+ 
+ 
+ 
+function removeOption(obj){
+    obj.parentNode.parentNode.previousElementSibling.remove();//previousElementSibling是获取上一个兄弟结点
+    obj.parentNode.parentNode.remove();
+ 
+}
+function cnm(obj){
+    var ab=document.getElementById("pink");
+    var cd=ab.getElementsByClassName("yy");
+    if(cd.length<2){
+        var a1=obj.getAttribute("name");
+        var a2=a1.substr(a1.length-1,1);//获取名字的最后一位字符，（start，）
+        var a3=parseInt(a2);//将字符串转换成数字类型
+        obj.parentNode.className="hidden";
+        var a4=a3+1;
+        var ad_doc="ad_doc"+a4;
+        var file="file"+a4;
+        var old_doc="ad_doc"+a3;
+        var ad_img="ad_img"+a3;
+        var para=document.createElement("div");
+        para.className="dd";
+        para.innerHTML="<input  type='file' name='"+file+"' id='"+ad_doc+"'  accept='image/*' onchange='cnm(this)' /><span >+</span>";
+        obj.parentNode.parentNode.appendChild(para);
+        var para2=document.createElement("div");
+        para2.className="yy";
+        para2.innerHTML=" <img class='hidden ci'  id='"+ad_img+"' src='./images/5.jpg' width='100' height='100'  style='margin-right:0.5rem' data-preview-src='' data-preview-group='1'/><div class='hidden cel' ><span class='ch'  onclick='removeOption(this)' >+</span></div></div>";
+ 
+        document.getElementById("pink").insertBefore(para2,document.getElementById("pink").lastChild);
+        setImagePreview(old_doc,ad_img,'100','100');
+    }else{
+        alert("只能上傳二張圖片！");
+    }
+}
+//下面用于图片上传预览功能
+function setImagePreview(doc,preview,width,height) {
+    //input
+    var docObj = document.getElementById(doc);
+    //img
+    var imgObjPreview = document.getElementById(preview);
+    //div
+    var divs = document.getElementById("localImag");
+    if (docObj.files && docObj.files[0]) {
+        //火狐下，直接设img属性
+        imgObjPreview.style.display = 'block';
+        imgObjPreview.style.width = width+'px';
+        imgObjPreview.style.height = height+'px';
+        //imgObjPreview.src = docObj.files[0].getAsDataURL();
+        //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+        imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+        imgObjPreview.className="";
+        imgObjPreview.className="show ci";
+    } else {
+        //IE下，使用滤镜
+        docObj.select();
+        var imgSrc = document.selection.createRange().text;
+        var localImagId = document.getElementById("localImag");
+        //必须设置初始大小
+        localImagId.style.width = width+"px";
+        localImagId.style.height = height+"px";
+        //图片异常的捕捉，防止用户修改后缀来伪造图片
+        try {
+            localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+            localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+        } catch(e) {
+            alert("您上传的图片格式不正确，请重新选择!");
+            return false;
+        }
+        imgObjPreview.style.display = 'none';
+        document.selection.empty();
+    }
+    return true;
+}
+		</script>
+	</body>
+</html>
