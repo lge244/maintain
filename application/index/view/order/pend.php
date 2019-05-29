@@ -36,6 +36,7 @@
         <li class="dingdan-li" style="border: none;">
             <p class="dingdan-left">图片上传</p>
             <button type="button" class="layui-btn" id="test2">多图片上传</button>
+
 		</li>
         <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
             预览图：
@@ -104,5 +105,39 @@ $('#distance_Point').val(r.point.lng +','+ r.point.lat);
     })
 
 })
+</script>
+<script>
+	Quagga.init({
+		inputStream : {
+			name : "Live",
+			type : "LiveStream",
+			target: document.querySelector('#scanning')    // Or '#yourElement' (optional)
+		},
+		decoder : {
+			readers : ["ean_reader",'code_39_reader'],
+			debug: {
+				drawBoundingBox: false,
+				showFrequency: false,
+				drawScanline: false,
+				showPattern: false
+			},
+			multiple: false
+		}
+	}, function(err) {
+		if (err) {
+			console.log(err);
+			return
+		}
+		console.log("Initialization finished. Ready to start");
+		Quagga.start();
+
+//            Quagga.onProcessed(function(data){
+//                console.log(data)
+//            })
+		Quagga.onDetected(function(data){
+			console.log(data)
+			alert(data.codeResult.code)
+		})
+	});
 </script>
 {/block}
