@@ -39,6 +39,12 @@
     </div>
 
     <div class="layui-form-item">
+        <label class="layui-form-label">标准距离</label>
+        <div class="layui-input-inline">
+            <input type="number" class="layui-input" name="standard" value="{$item.standard}">公里
+        </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label">距离奖励</label>
         <div class="layui-input-inline">
             <input type="number" class="layui-input" name="distance_reward" value="{$item.distance_reward}">
