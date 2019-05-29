@@ -56,7 +56,13 @@
         <div class="layui-input-inline">
             <input type="number" class="layui-input" name="time_reward" value="{$item.time_reward}">
         </div>
-
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">提现手续费</label>
+        <div class="layui-input-inline">
+            <input type="number" class="layui-input" name="service_ratio" value="{$item.service_ratio}">
+            手续费为百分比（不填等于无需手续费）
+        </div>
     </div>
 
 </form>

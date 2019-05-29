@@ -27,6 +27,7 @@ class System extends Base
         $data['distance_reward'] = input('post.distance_reward');
         $data['time_reward'] = input('post.time_reward');
         $data['standard'] = input('post.standard');
+        $data['service_ratio'] = input('post.service_ratio');
         $res = $this->db->table('system')->where(array('id' => 1))->update($data);
         if ($res) {
             exit(json_encode(array('code' => 0, 'msg' => '保存成功!')));
