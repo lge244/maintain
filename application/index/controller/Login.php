@@ -36,7 +36,8 @@ class Login extends IndexBase
 		$res = $this->maintainer->findData(['username' => $data['username']]);
 		Session::set('user', [
 			'id' => $res['id'],
-			'username' => $res['username']
+			'username' => $res['username'],
+			'true_name' => $res['true_name']
 		]);
 		if ($res['password'] != md5($data['password'])) return json(['status' => 0, 'msg' => '账号或密码错误']);
 		return json(['status' => 1, 'msg' => '登陆成功']);
