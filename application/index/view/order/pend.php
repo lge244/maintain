@@ -20,7 +20,7 @@
 			<input class="dingdan-right" style="border: .01rem solid #BBBBBB;border-radius: .4rem;height: .57rem;margin: auto 0;text-indent: .2rem;">
 		</li>
 		<li class="dingdan-li" style="border: none;">
-			<p class="dingdan-left">扫描条形码</p>
+			<p class="dingdan-left" id="scanning">扫描条形码</p>
 			<input class="dingdan-right" style="border: .01rem solid #BBBBBB;border-radius: .4rem;height: .57rem;margin: auto 0;text-indent: .2rem;">
 		</li>
 		<li class="dingdan-li" style="border: none;">
@@ -45,5 +45,39 @@ $(function () {
 		$ = layui.jquery;
 	});
 })
+</script>
+<script>
+	Quagga.init({
+		inputStream : {
+			name : "Live",
+			type : "LiveStream",
+			target: document.querySelector('#scanning')    // Or '#yourElement' (optional)
+		},
+		decoder : {
+			readers : ["ean_reader",'code_39_reader'],
+			debug: {
+				drawBoundingBox: false,
+				showFrequency: false,
+				drawScanline: false,
+				showPattern: false
+			},
+			multiple: false
+		}
+	}, function(err) {
+		if (err) {
+			console.log(err);
+			return
+		}
+		console.log("Initialization finished. Ready to start");
+		Quagga.start();
+
+//            Quagga.onProcessed(function(data){
+//                console.log(data)
+//            })
+		Quagga.onDetected(function(data){
+			console.log(data)
+			alert(data.codeResult.code)
+		})
+	});
 </script>
 {/block}
