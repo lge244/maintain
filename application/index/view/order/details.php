@@ -21,8 +21,8 @@
 			<p class="dingdan-right">{$info['brand']}</p>
 		</li>
 		<li class="dingdan-li">
-			<p class="dingdan-left">用户名：</p>
-			<p class="dingdan-right">{$true_name}</p>
+			<p class="dingdan-left">客户姓名：</p>
+			<p class="dingdan-right">{$info['username']}</p>
 		</li>
 		<li class="dingdan-li">
 			<p class="dingdan-left">电话：</p>
