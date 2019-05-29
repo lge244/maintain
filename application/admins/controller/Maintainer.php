@@ -34,7 +34,7 @@ class Maintainer extends Base
 	{
 		if (isset($id) && !empty($id)) {
 			// 编辑
-			$list = $this->m_maintainer->findData($id);
+			$list = $this->m_maintainer->findData(['id' => $id]);
 		}
 		return view('maintainer/form', ['item' => isset($list) ? $list : '']);
 	}

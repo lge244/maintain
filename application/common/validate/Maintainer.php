@@ -52,5 +52,6 @@ class Maintainer extends Validate
 	 */
 	protected $scene = [
 		'add' => ['true_name', 'username', 'password', 'img', 'phone', 'office', 'work_type', 'staff_id', 'sex', 'address'],
+		'login' => ['username', 'password'],
 	];
 }

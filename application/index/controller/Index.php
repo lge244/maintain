@@ -10,4 +10,10 @@ class Index extends IndexBase
 	{
 		parent::__construct();
 	}
+
+	public function index()
+	{
+		echo 1;die;
+		return view('index/index');
+	}
 }

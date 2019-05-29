@@ -27,14 +27,14 @@ class Maintainer extends Model
 
 	/**
 	 * 查询一条指定数据
-	 * @param $id
+	 * @param array $where
 	 * @param string $field
 	 * @return array|\PDOStatement|string|Model|null
 	 */
-	public function findData($id, $field = '*')
+	public function findData($where, $field = '*')
 	{
 		try {
-			return $this->where('id', $id)->field($field)->find();
+			return $this->where($where)->field($field)->find();
 		} catch (\Exception $e) {
 			return null;
 		}
