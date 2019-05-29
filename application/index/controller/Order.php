@@ -82,4 +82,19 @@ class Order extends IndexBase
         }
         exit(json_encode(array('code'=>1,'msg'=>"抢单成功！")));
     }
+
+    public function uploads()
+    {
+        // 获取到上传的图片信息
+        $file = request()->file('file');
+        // 移动到框架应用根目录/uploads/ 目录下
+        if ($info = $file->validate(['ext' => 'jpg,jpeg,png,gif'])->move('upload')) {
+            //客户端要求返回的必须是JSON格式数据,默认没有加上上传目录,需要手工添加一下
+            $fileName = '/upload/' . $info->getSaveName();
+            return json([1, '上传成功！', 'data' => $fileName]);
+        } else {
+            //处理出错信息,其实客户端也会处理的,可省略
+            return $file->getError();
+        }
+    }
 }

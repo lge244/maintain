@@ -77,10 +77,10 @@
             {case 1}已接单{/case}
             {default /}已完成
             {/switch}
+            {$vo.is_accomplish==1? '/已审核' : ''}
         </td>
         <td>
-            <button class="layui-btn layui-btn-warm layui-btn-xs" onclick="add({$vo.id})">编辑</button>
-            <button class="layui-btn layui-btn-danger layui-btn-xs" onclick="del({$vo.id})">删除</button>
+            <button class="layui-btn layui-btn-warm layui-btn-xs" onclick="add({$vo.id},{$vo.status})">审核</button>
         </td>
     </tr>
     {/volist}
@@ -95,15 +95,23 @@
     });
 
     // 添加
-    function add(gid) {
-        var pid = $('#pid').val();
-        layer.open({
-            type: 2,
-            title: gid > 0 ? '编辑角色' : '添加角色',
-            shade: 0.3,
-            area: ['70%', '70%'],
-            content: '/index.php/admins/repairs/add?gid=' + gid
-        });
+    function add(id,status) {
+        if (status !=2){
+            layer.msg('订单尚未完成！无需审核！', {'icon': 2});
+            return false;
+        }
+        $.post('/index.php/admins/repairs/audit',{
+            order_id:id,
+        },function (res) {
+            if (res.code > 0) {
+                layer.alert(res.msg, {'icon': 2});
+            } else {
+                layer.msg(res.msg, {'icon': 1});
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
+            }
+        },'json')
     }
 
     // 删除

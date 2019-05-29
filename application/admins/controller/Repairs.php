@@ -21,7 +21,7 @@ class Repairs extends Base
             $maintenance[$k]['brand'] = $this->db->table('project_sort')->where(array('id' => $v['brand']))->item();
             $maintenance[$k]['project'] = json_decode($v['project']);
             $maintenance[$k]['pic'] = json_decode($v['pic']);
-            if (is_array($maintenance[$k]['project'])){
+            if (is_array($maintenance[$k]['project'])) {
                 foreach ($maintenance[$k]['project'] as $key => $value) {
                     $maintenance[$k]['project'][$key] = $this->db->table('maintain_module')->where(array('id' => $value))->item();
                 }
@@ -51,7 +51,7 @@ class Repairs extends Base
         $data['creat_time'] = time();
         $data['pic'] = json_encode($data['pic']);
         $data['project'] = json_encode($data['project']);
-        if ($data['uid'] !=0){
+        if ($data['uid'] != 0) {
             $data['status'] = 1;
             $data['receive_time'] = time();
         }
@@ -98,6 +98,50 @@ class Repairs extends Base
 
     }
 
+    public function audit()
+    {
+        $order_id = input('post.order_id');
+        $maintenance = $this->db->table('maintenance_order')->where(array('id' => $order_id))->item();
+        $user = $this->db->table('maintainer')->where(array('id' => $maintenance['uid']))->item();
+
+        $project = json_decode($maintenance['project']);
+        $price = 0;
+        foreach ($project as $key => $value) {
+            $project_price = $this->db->table('maintain_module')->where(array('id' => $value))->item();
+            $price += $project_price['maintain_price'];
+        }
+        $price = $price + $maintenance['price'];
+        $time = $maintenance['finish_time'] - $maintenance['receive_time'];
+        $time = $time/3600;
+        switch ($time) {
+            case $time < 24:
+                $time_price = 30;
+                break;
+            case $time > 24 && $time <= 48:
+                $time_price = 20;
+                break;
+            case $time > 48 && $time <= 72:
+                $time_price = 10;
+                break;
+            default:
+                $time_price = 0;
+                break;
+        }
+        $price += $time_price;
+        $data['balance'] = $price+$user['balance'];
+        if ($price > 0) {
+           $res = $this->db->table('maintainer')->where(array('id' => $maintenance['uid']))->update($data);
+           if ($res){
+               $accomplish['is_accomplish'] = 1;
+               $res2 = $this->db->table('maintenance_order')->where(array('id' => $order_id))->update($accomplish);
+               if ($res2){
+                   exit(json_encode(array('code'=>0,'msg'=>"审核完成！")));
+               }
+               exit(json_encode(array('code'=>1,'msg'=>"网络错误！请重试！")));
+           }
+        }
+    }
+
     protected function getdistance($lng1, $lat1, $lng2, $lat2)
     {
         // 将角度转为狐度
@@ -110,4 +154,5 @@ class Repairs extends Base
         $s = round(2 * asin(sqrt(pow(sin($a / 2), 2) + cos($radLat1) * cos($radLat2) * pow(sin($b / 2), 2))) * 6378.137, 2);
         return $s;
     }
+
 }

@@ -237,7 +237,7 @@
         var users = $('select[name="users"]').val();
         $("input[name='project']:checked").each(function(){
             project.push($(this).val());
-        })
+        });
 
         $.post('/index.php/admins/repairs/save', {
             brand:brand,
