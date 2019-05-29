@@ -69,4 +69,17 @@ class Order extends IndexBase
 		if ($id_info['status'] != 1) $this->error('该订单状态不符合需求');
 		return view('order/pend');
 	}
+
+    public function receive()
+    {
+        $order_id = $this->request->param();
+        $user = Session::get('user');
+        $data['uid'] = $user['id'];
+        $data['status'] = 1;
+        $res = $this->maintainOrder->saveInfo($order_id,$data);
+        if ($res){
+            exit(json_encode(array('code'=>0,'msg'=>"抢单成功！")));
+        }
+        exit(json_encode(array('code'=>1,'msg'=>"抢单成功！")));
+    }
 }
