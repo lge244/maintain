@@ -18,7 +18,7 @@
 		</li>
 		<li class="dingdan-li">
 			<p class="dingdan-left">空调品牌：</p>
-			<p class="dingdan-right">{$info['brand']}</p>
+			<p class="dingdan-right">{$brand[$info['brand']]}</p>
 		</li>
 		<li class="dingdan-li">
 			<p class="dingdan-left">客户姓名：</p>
@@ -45,6 +45,11 @@
 	<ul class="choose-ul">
 		<li class="choose-li"><a id="order" style="display: inline-block;" class="choose-btn yes">接单</a></li>
 		<li class="choose-li"><a href="javascript:;" onclick="history.go(-1)" style="display: inline-block;" class="choose-btn no">拒绝</a></li>
+	</ul>
+	{/if}
+	{if $info['status'] == 1}
+	<ul class="choose-ul">
+		<li class="choose-li"><a href="{:url('order/pend', ['id' => $info['id']])}" style="display: inline-block;" class="choose-btn yes">订单已完成？</a></li>
 	</ul>
 	{/if}
 </div>

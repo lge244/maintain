@@ -11,7 +11,7 @@
 </div>
 <!--头部结束-->
 <!--工资开始-->
-<div class="salary">
+<!--<div class="salary">
 	<ul class="salary-ul">
 		<li class="salary-li">
 			<a href="javascript:;">
@@ -29,7 +29,7 @@
 			</a>
 		</li>
 	</ul>
-</div>
+</div>-->
 <!--工资结束-->
 <!--订单开始-->
 <div class="dd-wrap">

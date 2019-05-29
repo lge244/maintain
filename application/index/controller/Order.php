@@ -7,6 +7,7 @@ namespace app\index\controller;
 
 use app\common\controller\IndexBase;
 use app\common\model\MaintenanceOrder;
+use think\Db;
 
 class Order extends IndexBase
 {
@@ -54,6 +55,18 @@ class Order extends IndexBase
 	{
 		if (empty($id)) $this->error('非法请求');
 		$info = $this->maintainOrder->findData(['id' => $id]);
-		return view('order/details', ['info' => $info]);
+		$brand = Db::name('project_sort')->column('sort_title', 'id');
+		return view('order/details', [
+			'info' => $info,
+			'brand' => $brand
+		]);
+	}
+
+	public function pend($id = null)
+	{
+		if (empty($id)) $this->error('非法请求');
+		$id_info = $this->maintainOrder->findData(['id' => $id]);
+		if ($id_info['status'] != 1) $this->error('该订单状态不符合需求');
+		return view('order/pend');
 	}
 }
