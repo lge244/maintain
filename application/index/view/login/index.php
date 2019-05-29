@@ -22,19 +22,19 @@
 </div>
 <button id="login"  style="width: 80%;height: .7rem;margin: 0 auto;background:#40d1c4;display: block;text-align: center;color: #fff;font-size: .32rem;line-height: .7rem;border-radius: 1rem;">登录</button>
 <div style="width: 80%;margin: .2rem auto;">
-	<a href="#" style="font-size: .24rem;color:#6C6C6C;float: right;">忘记密码可咨询管理员</a>
+	<a href="javascript:;" style="font-size: .24rem;color:#6C6C6C;float: right;">忘记密码可咨询管理员</a>
 </div>
 <script>
+$(function () {
 	layui.use('layer',function(){
 		layer = layui.layer;
 		$ = layui.jquery;
 	});
-$(function () {
 	$('#login').click(function () {
 		var username = $('#username').val();
 		var password = $('#password').val();
 		if (!username || !password) {
-			layer.alert('请将信息填写完整');
+			layer.msg('请将信息填写完整');
 			return false;
 		}
 		$.ajax({

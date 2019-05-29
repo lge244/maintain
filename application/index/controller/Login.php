@@ -15,7 +15,7 @@ class Login extends IndexBase
 	protected $maintainer;
 	public function __construct()
 	{
-		parent::__construct();
+		parent::__construct(false);
 		$this->maintainer = new Maintainer();
 	}
 
@@ -34,6 +34,10 @@ class Login extends IndexBase
 		$vali_res = $this->validate($data, 'app\common\validate\Maintainer.login');
 		if ($vali_res !== true) return json(['status' => 0, 'msg' => $vali_res]);
 		$res = $this->maintainer->findData(['username' => $data['username']]);
+		Session::set('user', [
+			'id' => $res['id'],
+			'username' => $res['username']
+		]);
 		if ($res['password'] != md5($data['password'])) return json(['status' => 0, 'msg' => '账号或密码错误']);
 		return json(['status' => 1, 'msg' => '登陆成功']);
 	}
@@ -44,8 +48,7 @@ class Login extends IndexBase
 	 */
 	public function loginOut()
 	{
-		$res = Session::delete('user');
-		if (!$res) return json(['status' => 0, 'msg' => '退出失败']);
+		Session::delete('user');
 		return json(['status' => 1, 'msg' => '退出成功']);
 	}
 }
