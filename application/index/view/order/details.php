@@ -41,10 +41,12 @@
 			<p class="dingdan-right">{$info['worry'] ? '是' : '否'}</p>
 		</li>
 	</ul>
+	{if $info['status'] == 0}
 	<ul class="choose-ul">
 		<li class="choose-li"><a id="order" style="display: inline-block;" class="choose-btn yes">接单</a></li>
 		<li class="choose-li"><a href="javascript:;" onclick="history.go(-1)" style="display: inline-block;" class="choose-btn no">拒绝</a></li>
 	</ul>
+	{/if}
 </div>
 <!--订单结束-->
 <script>

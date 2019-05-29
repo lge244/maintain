@@ -35,9 +35,9 @@
 <div class="dd-wrap">
 	<div class="dd-tab">
 		<ul class="dd-tab-hd">
-			<li class="dd-li active">派单</li>
-			<li class="dd-li">抢单</li>
-			<li class="dd-li">订单详情</li>
+			<li class="dd-li active">抢单</li>
+			<li class="dd-li">进行中</li>
+			<li class="dd-li">已完成</li>
 		</ul>
 		<ul class="dd-tab-bd">
 			{foreach $list as $key => $val}
@@ -45,12 +45,12 @@
 				<div class="dd-info">
 					{foreach $val as $v}
 					<ul class="info-ul">
-						<li class="info-li">订单号：{$v.order_id}</li>
+						<li class="info-li">订单号：{$v.id}</li>
 						<li class="info-li">
-							<p class="description">故障描述：{$v.des}</p>
+							<p class="description">故障描述：{$v.desc}</p>
 						</li>
 						<li class="info-li" style="text-align: center;">
-							<a href="{:url('order/details', ['id' => $v.order_id])}">进入查看</a>
+							<a href="{:url('order/details', ['id' => $v.id])}">进入查看</a>
 						</li>
 					</ul>
 					{/foreach}

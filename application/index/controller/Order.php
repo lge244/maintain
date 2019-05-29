@@ -24,16 +24,24 @@ class Order extends IndexBase
 	 */
 	public function index()
 	{
-		// 派单
+		// 抢单
 		$where1 = [
-			'uid', '<>', 0,
-			'status', '=', 1
+			'uid' => 0,
+			'status' => 0,
 		];
 		$list1 = $this->maintainOrder->findAllData($where1, '*', 'creat_time');
-		// 抢单
-		$list2 = $this->maintainOrder->findAllData();
-		// 已完成订单
-		$list3 = $this->maintainOrder->findAllData();
+		// 进行中
+		$where2 = [
+			'uid' => $this->uid,
+			'status' => 1
+		];
+		$list2 = $this->maintainOrder->findAllData($where2, '*', 'creat_time');
+		// 已完成
+		$where3 = [
+			'uid' => $this->uid,
+			'status' => 2
+		];
+		$list3 = $this->maintainOrder->findAllData($where3, '*', 'creat_time');
 		$list = [
 			$list1, $list2, $list3
 		];
