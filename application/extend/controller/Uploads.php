@@ -26,7 +26,7 @@ class Uploads extends Controller
 	{
 		$config = [
 			'size' => 2097152,
-			'ext'  => 'jpg,gif,png,bmp'
+			'ext'  => 'jpeg,jpg,gif,png,bmp'
 		];
 
 		$file = $this->request->file('file');
