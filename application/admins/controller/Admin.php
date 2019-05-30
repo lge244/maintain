@@ -14,6 +14,8 @@ class Admin extends Base{
 	public function add(){
 		$id = (int)input('get.id');
 		$data['item'] = $this->db->table('admins')->where(array('id'=>$id))->item();
+		$data['groups'] = $this->db->table('admin_groups')->lists();
+		$data['brand'] = $this->db->table('project_sort')->lists();
 
 		return $this->fetch('',$data);
 	}
@@ -26,6 +28,7 @@ class Admin extends Base{
 		$data['gid'] = (int)input('post.gid');
 		$data['truename'] = trim(input('post.truename'));
 		$data['status'] = (int)input('post.status');
+		$data['bid'] = (int)input('post.bid');
 		$password = input('post.password');
 
 		if(!$data['username']){

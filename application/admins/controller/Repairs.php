@@ -9,6 +9,7 @@
 namespace app\admins\controller;
 
 use think\Controller;
+use think\facade\Session;
 use Util\SysDb;
 
 
@@ -16,7 +17,12 @@ class Repairs extends Base
 {
     public function index()
     {
-        $maintenance = $this->db->table('maintenance_order')->lists();
+        $admin = Session::get('admin');
+        if ($admin['bid'] != 0){
+            $maintenance = $this->db->table('maintenance_order')->where(array('brand'=>$admin['bid']))->lists();
+        }else{
+            $maintenance = $this->db->table('maintenance_order')->lists();
+        }
         foreach ($maintenance as $k => $v) {
             $maintenance[$k]['brand'] = $this->db->table('project_sort')->where(array('id' => $v['brand']))->item();
             $maintenance[$k]['project'] = json_decode($v['project']);

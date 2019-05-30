@@ -14,18 +14,28 @@
 				<input type="text" class="layui-input" name="username" value="{$item.username}" <?=$item['id']>0?'readonly':''?>>
 			</div>
 		</div>
-
 		<div class="layui-form-item">
 			<label class="layui-form-label">角色</label>
 			<div class="layui-input-inline">
 				<select name="gid">
-					<option value="1">系统管理员</option>
-					<option value="2">开发人员</option>
-					<option value="3">网站编辑</option>
+                    {volist name="groups" id="vo"}
+					<option value="{$vo.gid}" {$item.gid==$vo.gid?"selected":""}>{$vo.title}</option>
+                    {/volist}
 				</select>
 			</div>
 		</div>
+        <div class="layui-form-item">
+			<label class="layui-form-label">品牌</label>
+			<div class="layui-input-inline">
+				<select name="bid">
+                    <option value="0">所有（不是空调管理员请选择此项）</option>
 
+                    {volist name="brand" id="vo"}
+					<option value="{$vo.id}">{$vo.sort_title}</option>
+                    {/volist}
+				</select>
+			</div>
+		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">密码</label>
 			<div class="layui-input-inline">
@@ -86,7 +96,6 @@
 				layer.alert(res.msg,{'icon':2});
 			}else{
 				layer.msg(res.msg,{'icon':1});
-
 				setTimeout(function(){parent.window.location.reload();},1000);
 			}
 		},'json');
