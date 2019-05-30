@@ -15,6 +15,7 @@
 		text-indent: 0;
 		line-height: 26px;
 	}
+
 	.file input {
 		position: absolute;
 		font-size: 100px;
@@ -22,6 +23,7 @@
 		top: 0;
 		opacity: 0;
 	}
+
 	.file:hover {
 		background: #AADFFD;
 		border-color: #78C3F3;
@@ -42,8 +44,8 @@
 <div class="dingdan">
 	<ul class="dingdan-ul">
 		<li class="dingdan-li" style="border: none;">
-			<p class="dingdan-left">订单号</p>
-			<p class="dingdan-right">20190520112</p>
+			<p class="dingdan-left">订单id</p>
+			<p class="dingdan-right">{$info['id']}</p>
 		</li>
 		<li class="dingdan-li" style="border: none;">
 			<p class="dingdan-left">距离</p>
@@ -62,9 +64,13 @@
 
 		</li>
 		<li class="dingdan-li" style="border: none;">
-			<p class="dingdan-left">维修项目</p>
-			<input class="dingdan-right"
-			       style="border: .01rem solid #BBBBBB;border-radius: .4rem;height: .57rem;margin: auto 0;text-indent: .2rem;">
+			<div class="layui-form-item">
+				<label class="layui-form-label">状态</label>
+				<div class="layui-input-inline">
+					<input type="checkbox" name="ishidden" lay-skin="primary" title="是否隐藏" value="1">
+					<input type="checkbox" name="status" lay-skin="primary" title="是否禁用" value="1" >
+				</div>
+			</div>
 		</li>
 		<li class="dingdan-li" style="border: none;">
 			<p class="dingdan-left">完成时间</p>
@@ -92,6 +98,11 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Z8OaLxT8vIhoPHeAfp1ic1cbDBXMyZZu"></script>
 <script>
 	$(function () {
+		layui.use(['layer','form'],function(){
+			var form = layui.form;
+			layer = layui.layer;
+			$ = layui.jquery;
+		});
 		layui.use(['layer', 'upload'], function () {
 			layer = layui.layer;
 			$ = layui.jquery;
@@ -155,13 +166,13 @@
 					if (res.error != 0) layer.msg(res.message);
 					var img_url = "http://" + document.domain + res.url;
 					$.ajax({
-						type : 'post',
-						url : '{:url("./extend/barcode/check")}',
-						data : {
-							img : img_url
+						type: 'post',
+						url: '{:url("./extend/barcode/check")}',
+						data: {
+							img: img_url
 						},
-						dataType : 'json',
-						success : function (data) {
+						dataType: 'json',
+						success: function (data) {
 							if (data.status) {
 								$('#barcode_number').val(data.data);
 							} else {

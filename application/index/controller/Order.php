@@ -69,12 +69,13 @@ class Order extends IndexBase
 	public function pend($id = null)
 	{
 		if (empty($id)) $this->error('非法请求');
-		$id_info = $this->maintainOrder->findData(['id' => $id]);
-		if ($id_info['status'] != 1) $this->error('该订单状态不符合需求');
-		dump($id_info);
+		$info = $this->maintainOrder->findData(['id' => $id]);
+		if ($info['status'] != 1) $this->error('该订单状态不符合需求');
 		$maintain_module = $this->maintainModule->findAllData([], '*', 'id');
-		dump($maintain_module);
-		return view('order/pend');
+		return view('order/pend', [
+			'info' => $info,
+			'maintain_module' => $maintain_module
+		]);
 	}
 
 	public function receive()
