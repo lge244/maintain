@@ -4,7 +4,9 @@
 <!--头部开始-->
 <div class="top">
 	<div class="top-content">
-		<a href="javascript:;" onclick="history.go(-1);" class="back"><img src="__STATIC_INDEX_IMG__/back.png" class="back-pic" /></a>
+		<a href="javascript:;" onclick="history.go(-1);" class="back">
+			<img src="__STATIC_INDEX_IMG__/back.png" class="back-pic"/>
+		</a>
 		<p class="top-name">订单详情</p>
 	</div>
 </div>
@@ -44,36 +46,38 @@
 	{if $info['status'] == 0}
 	<ul class="choose-ul">
 		<li class="choose-li"><a id="order" style="display: inline-block;" class="choose-btn yes">接单</a></li>
-		<li class="choose-li"><a href="javascript:;" onclick="history.go(-1)" style="display: inline-block;" class="choose-btn no">拒绝</a></li>
+		<li class="choose-li"><a href="javascript:;" onclick="history.go(-1)" style="display: inline-block;"
+		                         class="choose-btn no">拒绝</a></li>
 	</ul>
 	{/if}
 	{if $info['status'] == 1}
 	<ul class="choose-ul">
-		<li class="choose-li"><a href="{:url('order/pend', ['id' => $info['id']])}" style="display: inline-block;" class="choose-btn yes">订单已完成？</a></li>
+		<li class="choose-li"><a href="{:url('order/pend', ['id' => $info['id']])}" style="display: inline-block;"
+		                         class="choose-btn yes">订单已完成？</a></li>
 	</ul>
 	{/if}
 </div>
 <!--订单结束-->
 <script>
-$(function () {
-	layui.use('layer', function () {
-		layer = layui.layer;
-		$ = layui.jquery;
-	});
-    $('.yes').click(function () {
-        $.post("/index.php/index/order/receive",{
-            order_id:{$info.id}
-        },function (res) {
-            if (res.code == 0){
-                layer.msg(res.msg);
-                setTimeout(function(){
-                    window.location.reload()
-                },1000);
-            }else{
-                layer.msg(res.msg);
-            }
-        },'json')
-    })
-})
+	$(function () {
+		layui.use('layer', function () {
+			layer = layui.layer;
+			$ = layui.jquery;
+		});
+		$('.yes').click(function () {
+			$.post("/index.php/index/order/receive", {
+				order_id: {$info.id}
+			}, function (res) {
+				if (res.code == 0) {
+					layer.msg(res.msg);
+					setTimeout(function () {
+						window.location.reload()
+					}, 1000);
+				} else {
+					layer.msg(res.msg);
+				}
+			}, 'json')
+		})
+	})
 </script>
 {/block}

@@ -112,6 +112,8 @@ class Order extends IndexBase
 	public function complete()
 	{
 		$data = $this->request->param();
+
 		dump($data);
+
 	}
 }
